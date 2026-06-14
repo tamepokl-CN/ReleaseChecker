@@ -1,3 +1,8 @@
+
+_这个fork出于自用考虑，如果这种行为存在问题，请提出issue.Thanks:)_
+
+_I got it for my own purposes.If this behavior causes any problems, please submit an issue. Thanks:)_
+
 <div align="center">
 
 # 🚀 ReleaseChecker

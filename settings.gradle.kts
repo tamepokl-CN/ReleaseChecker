@@ -1,1 +1,1 @@
-rootProject.name = "ReleaseChecker"
+rootProject.name = "releasechecker"

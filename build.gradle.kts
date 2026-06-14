@@ -3,12 +3,12 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 plugins {
     id("java")
     id("maven-publish")
-    id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("com.gradleup.shadow") version "9.4.2"
     id("checkstyle")
     id("co.uzzu.dotenv.gradle") version "4.0.0"
 }
 
-group = "ovh.neziw"
+group = "com.tamepokl"
 version = "1.0.2"
 
 tasks.withType<JavaCompile> {
@@ -55,23 +55,20 @@ tasks.build {
 
 publishing {
     publications {
-        val publication = create<MavenPublication>("maven") {
+        create<MavenPublication>("maven") {
             groupId = "${project.group}"
             artifactId = project.name
             version = "${project.version}"
+            artifact(tasks.shadowJar)
         }
-        project.shadow.component(publication)
     }
     repositories {
         maven {
-            name = "neziw-repo"
-            url = uri("https://repo.neziw.ovh/releases/")
-
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/tamepokl-CN/ReleaseChecker")
             credentials {
-                val usernameKey = "MVN_USER"
-                val passwordKey = "MVN_PASS"
-                username = if (env.isPresent(usernameKey)) env.fetch(usernameKey) else System.getenv(usernameKey)
-                password = if (env.isPresent(passwordKey)) env.fetch(passwordKey) else System.getenv(passwordKey)
+                username = project.findProperty("gpr.user") as? String ?: System.getenv("GH_USERNAME")
+                password = project.findProperty("gpr.key") as? String ?: System.getenv("GH_TOKEN")
             }
         }
     }

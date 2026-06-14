@@ -25,6 +25,7 @@ package ovh.neziw.checker.release;
 
 import com.google.gson.annotations.SerializedName;
 import java.time.ZonedDateTime;
+import java.util.List;
 
 public record ReleaseData(
         int id,
@@ -35,5 +36,7 @@ public record ReleaseData(
         boolean draft,
         boolean prerelease,
         @SerializedName("created_at") ZonedDateTime createdAt,
-        @SerializedName("published_at") ZonedDateTime publishedAt) {
+        @SerializedName("published_at") ZonedDateTime publishedAt,
+        String body,
+        List<Asset> assets) {
 }
